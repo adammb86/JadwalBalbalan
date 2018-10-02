@@ -86,7 +86,11 @@ class EventFragment : Fragment(),
     class EventFragmentUI() : AnkoComponent<ViewGroup> {
         override fun createView(ui: AnkoContext<ViewGroup>) = with(ui) {
             verticalLayout {
-                lparam(width = matchParent, height = matchParent)
+                lparams {
+                    width = matchParent
+                    height = matchParent
+                }
+
                 padding = dip(8)
                 backgroundColor = ContextCompat.getColor(context, R.color.grey_200)
 
