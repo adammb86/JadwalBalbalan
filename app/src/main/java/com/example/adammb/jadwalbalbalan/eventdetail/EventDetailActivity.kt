@@ -31,7 +31,7 @@ class EventDetailActivity : AppCompatActivity(),
     private lateinit var presenter: EventDetailPresenter
 
     companion object {
-        val EVENT_EXTRA = "event-extra"
+        const val EVENT_EXTRA = "event-extra"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

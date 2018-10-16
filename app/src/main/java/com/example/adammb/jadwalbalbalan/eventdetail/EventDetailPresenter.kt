@@ -12,8 +12,8 @@ class EventDetailPresenter(private val view: EventDetailContract.EventDetailView
                            private val gson: Gson) : EventDetailContract.EventDetailPresenter {
 
     companion object {
-        val TEAM_HOME = "team-home"
-        val TEAM_AWAY = "team-away"
+        const val TEAM_HOME = "team-home"
+        const val TEAM_AWAY = "team-away"
     }
 
     override fun getTeam(teamId: String?, type: String?) {

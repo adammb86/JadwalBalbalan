@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
 
-    fun replaceFragment(fragment: Fragment) {
+    private fun replaceFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
         fragmentManager.beginTransaction()
                 .replace(R.id.main_framelayout_container, fragment)

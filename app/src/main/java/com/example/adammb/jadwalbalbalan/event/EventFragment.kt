@@ -35,7 +35,7 @@ class EventFragment : Fragment(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            eventType = arguments!!.getString(EVENT_TYPE)
+            eventType = arguments?.getString(EVENT_TYPE)
         }
     }
 
@@ -70,9 +70,9 @@ class EventFragment : Fragment(),
     }
 
     companion object {
-        val EVENT_TYPE = "event-type"
-        val EVENT_TYPE_PREV = "event-type-prev"
-        val EVENT_TYPE_NEXT = "event-type-next"
+        const val EVENT_TYPE = "event-type"
+        const val EVENT_TYPE_PREV = "event-type-prev"
+        const val EVENT_TYPE_NEXT = "event-type-next"
 
         fun newInstance(eventType: String): EventFragment {
             val fragment = EventFragment()
@@ -107,15 +107,15 @@ class EventFragment : Fragment(),
     }
 
     override fun showLoading() {
-        swipeRefreshLayout.post({
+        swipeRefreshLayout.post {
             swipeRefreshLayout.isRefreshing = true
-        })
+        }
     }
 
     override fun hideLoading() {
-        swipeRefreshLayout.post({
+        swipeRefreshLayout.post{
             swipeRefreshLayout.isRefreshing = false
-        })
+        }
     }
 
     override fun showEventList(events: List<Event>) {

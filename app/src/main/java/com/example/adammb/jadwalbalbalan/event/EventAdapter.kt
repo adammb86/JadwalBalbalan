@@ -107,11 +107,11 @@ class EventAdapter(private val context: Context?,
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textViewDate: TextView = view.find(R.id.event_textview_date)
-        val textViewTeamHomeScore: TextView = view.find(R.id.event_textview_teamhomescore)
-        val textViewTeamHomeName: TextView = view.find(R.id.event_textview_teamhomename)
-        val textViewTeamAwayScore: TextView = view.find(R.id.event_textview_teamawayscore)
-        val textViewTeamAwayName: TextView = view.find(R.id.event_textview_teamawayname)
+        private val textViewDate: TextView = view.find(R.id.event_textview_date)
+        private val textViewTeamHomeScore: TextView = view.find(R.id.event_textview_teamhomescore)
+        private val textViewTeamHomeName: TextView = view.find(R.id.event_textview_teamhomename)
+        private val textViewTeamAwayScore: TextView = view.find(R.id.event_textview_teamawayscore)
+        private val textViewTeamAwayName: TextView = view.find(R.id.event_textview_teamawayname)
 
         fun bindItem(event: Event, listener: (Event) -> Unit) {
             textViewDate.text = event.date
