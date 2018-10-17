@@ -1,5 +1,6 @@
 package com.example.adammb.jadwalbalbalan.eventdetail
 
+import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -9,6 +10,8 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.text.TextUtils
 import android.view.Gravity
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -29,6 +32,9 @@ class EventDetailActivity : AppCompatActivity(),
     private lateinit var imageViewTeamHomeBadge: ImageView
     private lateinit var imageViewTeamAwayBadge: ImageView
     private lateinit var presenter: EventDetailPresenter
+    private var menuItem: Menu? = null
+    private var isFavorited: Boolean = false
+    private lateinit var event: Event
 
     companion object {
         const val EVENT_EXTRA = "event-extra"
@@ -36,7 +42,7 @@ class EventDetailActivity : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val event = intent.extras.getParcelable<Event>(EVENT_EXTRA)
+        event = intent.extras.getParcelable<Event>(EVENT_EXTRA)
         EventDetailActivityUI(event).setContentView(this)
 
         toolbar = find(R.id.eventdetail_toolbar)
@@ -49,8 +55,34 @@ class EventDetailActivity : AppCompatActivity(),
         val request = ApiRepository()
         val gson = Gson()
         presenter = EventDetailPresenter(this, request, gson)
+        isFavorited = presenter.getFavoriteState(event.eventId.toString())
+        showFavoriteState(isFavorited)
         presenter.getTeam(event.teamHomeId, EventDetailPresenter.TEAM_HOME)
         presenter.getTeam(event.teamAwayId, EventDetailPresenter.TEAM_AWAY)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_detail, menu)
+        menuItem = menu
+        showFavoriteState(isFavorited)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_favorite -> {
+                if (isFavorited)
+                    presenter.removeFromFavorite(event.eventId.toString())
+                else
+                    presenter.addToFavorite(event)
+
+                isFavorited = !isFavorited
+                showFavoriteState(isFavorited)
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -467,6 +499,10 @@ class EventDetailActivity : AppCompatActivity(),
         }
     }
 
+    override fun getContext(): Context {
+        return this@EventDetailActivity
+    }
+
     override fun showLogo(url: String?, type: String?) {
         when (type) {
             EventDetailPresenter.TEAM_HOME -> Glide.with(this@EventDetailActivity)
@@ -478,5 +514,12 @@ class EventDetailActivity : AppCompatActivity(),
                     .apply(RequestOptions().override(100, 100))
                     .into(imageViewTeamAwayBadge)
         }
+    }
+
+    override fun showFavoriteState(isFavorited: Boolean) {
+        if (isFavorited)
+            menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_star_white_24dp)
+        else
+            menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_star_border_white_24dp)
     }
 }

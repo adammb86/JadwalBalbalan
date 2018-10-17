@@ -1,5 +1,6 @@
 package com.example.adammb.jadwalbalbalan.event
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -39,6 +40,13 @@ class EventFragment : Fragment(),
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        when (arguments?.get(EVENT_TYPE)) {
+            EVENT_TYPE_FAVORITE -> presenter.getFavoriteEventList()
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = EventFragmentUI()
@@ -49,6 +57,7 @@ class EventFragment : Fragment(),
             when (arguments?.get(EVENT_TYPE)) {
                 EVENT_TYPE_PREV -> presenter.getPrevEventList("4328")
                 EVENT_TYPE_NEXT -> presenter.getNextEventList("4328")
+                EVENT_TYPE_FAVORITE -> presenter.getFavoriteEventList()
             }
         }
 
@@ -64,6 +73,7 @@ class EventFragment : Fragment(),
         when (arguments?.get(EVENT_TYPE)) {
             EVENT_TYPE_PREV -> presenter.getPrevEventList("4328")
             EVENT_TYPE_NEXT -> presenter.getNextEventList("4328")
+            EVENT_TYPE_FAVORITE -> presenter.getFavoriteEventList()
         }
 
         return view
@@ -73,6 +83,7 @@ class EventFragment : Fragment(),
         const val EVENT_TYPE = "event-type"
         const val EVENT_TYPE_PREV = "event-type-prev"
         const val EVENT_TYPE_NEXT = "event-type-next"
+        const val EVENT_TYPE_FAVORITE = "event-type-favorite"
 
         fun newInstance(eventType: String): EventFragment {
             val fragment = EventFragment()
@@ -106,6 +117,10 @@ class EventFragment : Fragment(),
         }
     }
 
+    override fun getContextFromFragment(): Context? {
+        return this@EventFragment.context
+    }
+
     override fun showLoading() {
         swipeRefreshLayout.post {
             swipeRefreshLayout.isRefreshing = true
@@ -113,7 +128,7 @@ class EventFragment : Fragment(),
     }
 
     override fun hideLoading() {
-        swipeRefreshLayout.post{
+        swipeRefreshLayout.post {
             swipeRefreshLayout.isRefreshing = false
         }
     }

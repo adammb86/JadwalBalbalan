@@ -13,8 +13,8 @@ import com.example.adammb.jadwalbalbalan.model.event.Event
 import org.jetbrains.anko.*
 
 class EventAdapter(private val context: Context?,
-        private val events: List<Event>,
-        private val listener: (Event) -> Unit)
+                   private val events: List<Event>,
+                   private val listener: (Event) -> Unit)
     : RecyclerView.Adapter<EventAdapter.ViewHolder>() {
 
     class EventUI : AnkoComponent<ViewGroup> {
