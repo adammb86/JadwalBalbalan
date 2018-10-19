@@ -9,4 +9,9 @@
         android:id="@+id/navigation_next_match"
         android:icon="@drawable/ic_event_black_24dp"
         android:title="@string/title_next_match" />
+
+    <item
+        android:id="@+id/navigation_favorite"
+        android:icon="@drawable/ic_star_border_white_24dp"
+        android:title="@string/title_favorite" />
 </menu>

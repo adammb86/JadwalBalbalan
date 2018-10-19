@@ -2,11 +2,12 @@ package com.example.adammb.jadwalbalbalan.event
 
 import com.example.adammb.jadwalbalbalan.api.ApiRepository
 import com.example.adammb.jadwalbalbalan.api.TheSportDBApi
+import com.example.adammb.jadwalbalbalan.database.database
 import com.example.adammb.jadwalbalbalan.model.event.Event
 import com.example.adammb.jadwalbalbalan.model.event.EventResponse
 import com.google.gson.Gson
-import kotlinx.coroutines.experimental.selects.select
 import org.jetbrains.anko.db.classParser
+import org.jetbrains.anko.db.select
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
