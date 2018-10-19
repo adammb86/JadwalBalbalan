@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
                 replaceFragment(EventFragment.newInstance(EventFragment.EVENT_TYPE_NEXT))
                 return@OnNavigationItemSelectedListener true
             }
-            navigation_favorite -> {
+            R.id.navigation_favorite -> {
                 supportActionBar?.title = getString(R.string.title_favorite)
                 replaceFragment(EventFragment.newInstance(EventFragment.EVENT_TYPE_FAVORITE))
                 return@OnNavigationItemSelectedListener true
