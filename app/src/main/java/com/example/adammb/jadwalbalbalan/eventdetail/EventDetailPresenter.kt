@@ -7,32 +7,34 @@ import com.example.adammb.jadwalbalbalan.api.TheSportDBApi
 import com.example.adammb.jadwalbalbalan.database.database
 import com.example.adammb.jadwalbalbalan.model.event.Event
 import com.example.adammb.jadwalbalbalan.model.team.TeamResponse
+import com.example.adammb.jadwalbalbalan.util.CoroutineContextProvider
 import com.google.gson.Gson
+import kotlinx.coroutines.experimental.async
+import org.jetbrains.anko.coroutines.experimental.bg
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 
 class EventDetailPresenter(private val view: EventDetailContract.EventDetailView,
                            private val apiRepository: ApiRepository,
-                           private val gson: Gson) : EventDetailContract.EventDetailPresenter {
+                           private val gson: Gson,
+                           private val context: CoroutineContextProvider = CoroutineContextProvider()) : EventDetailContract.EventDetailPresenter {
     companion object {
         const val TEAM_HOME = "team-home"
         const val TEAM_AWAY = "team-away"
     }
 
     override fun getTeam(teamId: String?, type: String?) {
-        doAsync {
-            val data = gson.fromJson(
-                    apiRepository.doRequest(TheSportDBApi.getTeam(teamId)),
-                    TeamResponse::class.java
-            )
-
-            uiThread {
-                view.showLogo(data.teams[0].teamBadge, type)
+        async(context.main) {
+            val data = bg {
+                gson.fromJson(
+                        apiRepository.doRequest(TheSportDBApi.getTeam(teamId)),
+                        TeamResponse::class.java
+                )
             }
+
+            view.showLogo(data.await().teams, type)
         }
     }
 
@@ -40,7 +42,7 @@ class EventDetailPresenter(private val view: EventDetailContract.EventDetailView
         var isFavorited: Boolean = false
         view.getContext().database.use {
             val result = select(Event.TABLE_FAVORITE)
-                    .whereArgs("(EVENT_ID = {EVENT_ID})",
+                    .whereArgs("(${Event.EVENT_ID} = {EVENT_ID})",
                             "EVENT_ID" to eventId)
             val favorite = result.parseList(classParser<Event>())
             if (!favorite.isEmpty())
@@ -85,7 +87,7 @@ class EventDetailPresenter(private val view: EventDetailContract.EventDetailView
         try {
             view.getContext().database.use {
                 delete(Event.TABLE_FAVORITE,
-                        "(EVENT_ID = {EVENT_ID})",
+                        "(${Event.EVENT_ID} = {EVENT_ID})",
                         "EVENT_ID" to eventId)
             }
             Toast.makeText(view.getContext(), "Removed from Favorite", Toast.LENGTH_SHORT).show()

@@ -26,7 +26,7 @@ import com.example.adammb.jadwalbalbalan.model.event.Event.Favorite.TEAM_HOME_SC
 import com.example.adammb.jadwalbalbalan.model.event.Event.Favorite.TEAM_HOME_SHOTS
 import org.jetbrains.anko.db.*
 
-class DatabaseOpenHelper(context: Context) : ManagedSQLiteOpenHelper(context, "FavoriteMatch.db", null, 1) {
+class DatabaseOpenHelper(context: Context) : ManagedSQLiteOpenHelper(context, "db_favorite_match.db", null, 1) {
     companion object {
         private var instance: DatabaseOpenHelper? = null
 

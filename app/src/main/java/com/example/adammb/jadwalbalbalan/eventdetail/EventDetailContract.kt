@@ -2,12 +2,13 @@ package com.example.adammb.jadwalbalbalan.eventdetail
 
 import android.content.Context
 import com.example.adammb.jadwalbalbalan.model.event.Event
+import com.example.adammb.jadwalbalbalan.model.team.Team
 
 interface EventDetailContract {
     interface EventDetailView {
         fun getContext(): Context
 
-        fun showLogo(url: String?, type: String?)
+        fun showLogo(teams: List<Team>, type: String?)
 
         fun showFavoriteState(isFavorited: Boolean)
     }

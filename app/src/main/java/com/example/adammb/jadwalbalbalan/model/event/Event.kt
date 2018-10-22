@@ -69,7 +69,7 @@ data class Event(
         var teamAwayLineupForward: String? = null
 ) : Parcelable {
     companion object Favorite {
-        const val TABLE_FAVORITE: String = "TABLE_FAVORITE"
+        const val TABLE_FAVORITE: String = "TABEL_FAVORITE_MATCH"
         const val ID: String = "ID_"
         const val EVENT_ID: String = "EVENT_ID"
         const val DATE: String = "DATE"

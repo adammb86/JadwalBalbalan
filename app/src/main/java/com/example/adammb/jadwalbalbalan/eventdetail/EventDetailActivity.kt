@@ -18,6 +18,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.adammb.jadwalbalbalan.R
 import com.example.adammb.jadwalbalbalan.api.ApiRepository
 import com.example.adammb.jadwalbalbalan.model.event.Event
+import com.example.adammb.jadwalbalbalan.model.team.Team
 import com.google.gson.Gson
 import org.jetbrains.anko.*
 import org.jetbrains.anko.appcompat.v7.toolbar
@@ -229,7 +230,7 @@ class EventDetailActivity : AppCompatActivity(),
 
                             textView(event.teamHomeGoalDetails) {
                                 id = R.id.eventdetail_textview_teamhomegoals
-                                gravity = Gravity.LEFT
+                                gravity = Gravity.START
                             }.lparams {
                                 width = wrapContent
                                 height = wrapContent
@@ -241,7 +242,7 @@ class EventDetailActivity : AppCompatActivity(),
 
                             textView(event.teamAwayGoalDetails) {
                                 id = R.id.eventdetail_textview_teamawaygoals
-                                gravity = Gravity.RIGHT
+                                gravity = Gravity.END
                             }.lparams {
                                 width = wrapContent
                                 height = wrapContent
@@ -272,7 +273,7 @@ class EventDetailActivity : AppCompatActivity(),
 
                             textView(event.teamHomeShots) {
                                 id = R.id.eventdetail_textview_teamhomeshots
-                                gravity = Gravity.LEFT
+                                gravity = Gravity.START
                             }.lparams {
                                 width = wrapContent
                                 height = wrapContent
@@ -284,7 +285,7 @@ class EventDetailActivity : AppCompatActivity(),
 
                             textView(event.teamAwayShots) {
                                 id = R.id.eventdetail_textview_teamawayshots
-                                gravity = Gravity.RIGHT
+                                gravity = Gravity.END
                             }.lparams {
                                 width = wrapContent
                                 height = wrapContent
@@ -334,7 +335,7 @@ class EventDetailActivity : AppCompatActivity(),
 
                             textView(event.teamHomeLineupGoalkeeper) {
                                 id = R.id.eventdetail_textview_goalkeeperteamhomelineups
-                                gravity = Gravity.LEFT
+                                gravity = Gravity.START
                             }.lparams {
                                 width = wrapContent
                                 height = wrapContent
@@ -346,7 +347,7 @@ class EventDetailActivity : AppCompatActivity(),
 
                             textView(event.teamAwayLineupGoalkeeper) {
                                 id = R.id.eventdetail_textview_goalkeeperteamawaylineups
-                                gravity = Gravity.RIGHT
+                                gravity = Gravity.END
                             }.lparams {
                                 width = wrapContent
                                 height = wrapContent
@@ -377,7 +378,7 @@ class EventDetailActivity : AppCompatActivity(),
 
                             textView(event.teamHomeLineupDefense) {
                                 id = R.id.eventdetail_textview_defenseteamhomelineups
-                                gravity = Gravity.LEFT
+                                gravity = Gravity.START
                             }.lparams {
                                 width = wrapContent
                                 height = wrapContent
@@ -389,7 +390,7 @@ class EventDetailActivity : AppCompatActivity(),
 
                             textView(event.teamAwayLineupDefense) {
                                 id = R.id.eventdetail_textview_defenseteamawaylineups
-                                gravity = Gravity.RIGHT
+                                gravity = Gravity.END
                             }.lparams {
                                 width = wrapContent
                                 height = wrapContent
@@ -420,7 +421,7 @@ class EventDetailActivity : AppCompatActivity(),
 
                             textView(event.teamHomeLineupMidfield) {
                                 id = R.id.eventdetail_textview_midfieldteamhomelineups
-                                gravity = Gravity.LEFT
+                                gravity = Gravity.START
                             }.lparams {
                                 width = wrapContent
                                 height = wrapContent
@@ -432,7 +433,7 @@ class EventDetailActivity : AppCompatActivity(),
 
                             textView(event.teamAwayLineupMidfield) {
                                 id = R.id.eventdetail_textview_midfieldteamawaylineups
-                                gravity = Gravity.RIGHT
+                                gravity = Gravity.END
                             }.lparams {
                                 width = wrapContent
                                 height = wrapContent
@@ -463,7 +464,7 @@ class EventDetailActivity : AppCompatActivity(),
 
                             textView(event.teamHomeLineupForward) {
                                 id = R.id.eventdetail_textview_forwardteamhomelineups
-                                gravity = Gravity.LEFT
+                                gravity = Gravity.START
                             }.lparams {
                                 width = wrapContent
                                 height = wrapContent
@@ -475,7 +476,7 @@ class EventDetailActivity : AppCompatActivity(),
 
                             textView(event.teamAwayLineupForward) {
                                 id = R.id.eventdetail_textview_forwardteamawaylineups
-                                gravity = Gravity.RIGHT
+                                gravity = Gravity.END
                             }.lparams {
                                 width = wrapContent
                                 height = wrapContent
@@ -503,14 +504,14 @@ class EventDetailActivity : AppCompatActivity(),
         return this@EventDetailActivity
     }
 
-    override fun showLogo(url: String?, type: String?) {
+    override fun showLogo(teams: List<Team>, type: String?) {
         when (type) {
             EventDetailPresenter.TEAM_HOME -> Glide.with(this@EventDetailActivity)
-                    .load(url)
+                    .load(teams.get(0).teamBadge)
                     .apply(RequestOptions().override(100, 100))
                     .into(imageViewTeamHomeBadge)
             EventDetailPresenter.TEAM_AWAY -> Glide.with(this@EventDetailActivity)
-                    .load(url)
+                    .load(teams.get(0).teamBadge)
                     .apply(RequestOptions().override(100, 100))
                     .into(imageViewTeamAwayBadge)
         }
