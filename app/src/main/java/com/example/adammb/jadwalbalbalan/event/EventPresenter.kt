@@ -7,12 +7,10 @@ import com.example.adammb.jadwalbalbalan.model.event.Event
 import com.example.adammb.jadwalbalbalan.model.event.EventResponse
 import com.example.adammb.jadwalbalbalan.util.CoroutineContextProvider
 import com.google.gson.Gson
-import org.jetbrains.anko.coroutines.experimental.bg
 import kotlinx.coroutines.experimental.async
+import org.jetbrains.anko.coroutines.experimental.bg
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 
 class EventPresenter(private val view: EventContract.EventView,
                      private val apiRepository: ApiRepository,

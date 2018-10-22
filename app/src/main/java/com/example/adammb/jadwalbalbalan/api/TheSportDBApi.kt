@@ -1,6 +1,5 @@
 package com.example.adammb.jadwalbalbalan.api
 
-import android.net.Uri
 import com.example.adammb.jadwalbalbalan.BuildConfig
 
 object TheSportDBApi {
