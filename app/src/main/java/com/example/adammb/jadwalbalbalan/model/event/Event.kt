@@ -6,13 +6,16 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Event(
-        val id: Long?,
+        val _ID: Long?,
 
         @SerializedName("idEvent")
         var eventId: String? = null,
 
         @SerializedName("dateEvent")
         var date: String? = null,
+
+        @SerializedName("strTime")
+        var time: String? = null,
 
         @SerializedName("idHomeTeam")
         var teamHomeId: String? = null,
@@ -66,13 +69,16 @@ data class Event(
         var teamAwayLineupMidfield: String? = null,
 
         @SerializedName("strAwayLineupForward")
-        var teamAwayLineupForward: String? = null
+        var teamAwayLineupForward: String? = null,
+
+        @SerializedName("strSport")
+        var sportType: String? = null
 ) : Parcelable {
     companion object Favorite {
-        const val TABLE_FAVORITE: String = "TABEL_FAVORITE_MATCH"
-        const val ID: String = "ID_"
+        const val TABEL_FAVORITE_MATCH: String = "TABEL_FAVORITE_MATCH"
         const val EVENT_ID: String = "EVENT_ID"
         const val DATE: String = "DATE"
+        const val TIME: String = "TIME"
         const val TEAM_HOME_ID: String = "TEAM_HOME_ID"
         const val TEAM_HOME_NAME: String = "TEAM_HOME_NAME"
         const val TEAM_HOME_SCORE: String = "TEAM_HOME_SCORE"
@@ -91,5 +97,6 @@ data class Event(
         const val TEAM_AWAY_LINEUP_DEFENSE: String = "TEAM_AWAY_LINEUP_DEFENSE"
         const val TEAM_AWAY_LINEUP_MIDFIELD: String = "TEAM_AWAY_LINEUP_MIDFIELD"
         const val TEAM_AWAY_LINEUP_FORWARD: String = "TEAM_AWAY_LINEUP_FORWARD"
+        const val SPORT_TYPE: String = "SPORT_TYPE"
     }
 }
