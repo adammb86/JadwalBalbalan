@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="event_textview_date" type="id" />
+    <item name="event_textview_time" type="id" />
+    <item name="event_imageview_addtocalendar" type="id" />
     <item name="event_textview_teamawayname" type="id" />
     <item name="event_textview_teamawayscore" type="id" />
     <item name="event_textview_teamhomename" type="id" />
     <item name="event_textview_teamhomescore" type="id" />
     <item name="event_textview_vs" type="id" />
+    <item name="event_spinner_league" type="id" />
     <item name="event_swiperefreshlayout" type="id" />
     <item name="event_recyclerview" type="id" />
     <item name="eventdetail_toolbar" type="id" />
@@ -15,6 +18,7 @@
     <item name="main_framelayout_container" type="id" />
     <item name="main_navigation" type="id" />
     <item name="eventdetail_textview_date" type="id" />
+    <item name="eventdetail_textview_time" type="id" />
     <item name="eventdetail_textview_teamawayname" type="id" />
     <item name="eventdetail_textview_teamawayscore" type="id" />
     <item name="eventdetail_textview_teamhomename" type="id" />
@@ -52,4 +56,19 @@
     <item name="eventdetail_imageview_teamhomebadge" type="id" />
     <item name="navigation_previous_match" type="id" />
     <item name="navigation_next_match" type="id" />
+    <item name="team_appbar" type="id" />
+    <item name="team_toolbar" type="id" />
+    <item name="team_imageview_logo" type="id" />
+    <item name="team_textview_name" type="id" />
+    <item name="team_spinner_league" type="id" />
+    <item name="team_swiperefreshlayout" type="id" />
+    <item name="team_recyclerview" type="id" />
+    <item name="overview_textview_content" type="id" />
+    <item name="player_imageview_avatar" type="id" />
+    <item name="player_textview_name" type="id" />
+    <item name="player_textview_position" type="id" />
+    <item name="player_recyclerview" type="id" />
+    <item name="player_swiperefreshlayout" type="id" />
+    <item name="playerdetail_appbar" type="id" />
+    <item name="playerdetail_toolbar" type="id" />
 </resources>
