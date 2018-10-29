@@ -1,0 +1,10 @@
+package com.example.adammb.jadwalbalbalan.model.player
+
+import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class PlayerResponse(
+        @SerializedName("player")
+        val players: List<Player>) : Parcelable
