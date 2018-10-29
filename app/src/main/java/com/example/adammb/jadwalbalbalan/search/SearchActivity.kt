@@ -13,7 +13,6 @@ import com.example.adammb.jadwalbalbalan.eventdetail.EventDetailActivity
 import com.example.adammb.jadwalbalbalan.model.event.Event
 import com.example.adammb.jadwalbalbalan.model.team.Team
 import com.example.adammb.jadwalbalbalan.team.TeamAdapter
-import com.example.adammb.jadwalbalbalan.teamdetail.TeamDetailActivity
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_search.*
 import org.jetbrains.anko.startActivity
