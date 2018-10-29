@@ -19,6 +19,7 @@ import com.example.adammb.jadwalbalbalan.R
 import com.example.adammb.jadwalbalbalan.api.ApiRepository
 import com.example.adammb.jadwalbalbalan.model.event.Event
 import com.example.adammb.jadwalbalbalan.model.team.Team
+import com.example.adammb.jadwalbalbalan.util.DateUtil
 import com.google.gson.Gson
 import org.jetbrains.anko.*
 import org.jetbrains.anko.appcompat.v7.toolbar
@@ -106,7 +107,7 @@ class EventDetailActivity : AppCompatActivity(),
                     toolbar {
                         id = R.id.eventdetail_toolbar
                         setTitleTextColor(Color.WHITE)
-                        title = "Match Detail"
+                        title = context.getString(R.string.title_match_detail)
                         popupTheme = R.style.AppTheme_PopupOverlay
                     }.lparams(width = matchParent) {
                         scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
@@ -117,13 +118,25 @@ class EventDetailActivity : AppCompatActivity(),
                     relativeLayout {
                         padding = dip(16)
 
-                        textView(event.date) {
+                        val dateTime = "${event.date} ${event.time}"
+                        textView(DateUtil.formatDate(dateTime)) {
                             id = R.id.eventdetail_textview_date
                             textColor = ContextCompat.getColor(context, R.color.colorPrimary)
                         }.lparams {
                             width = wrapContent
                             height = wrapContent
                             centerHorizontally()
+                            bottomMargin = dip(4)
+                        }
+
+                        textView(DateUtil.formatTime(dateTime)) {
+                            id = R.id.eventdetail_textview_time
+                            textColor = ContextCompat.getColor(context, R.color.colorPrimary)
+                        }.lparams {
+                            width = wrapContent
+                            height = wrapContent
+                            centerHorizontally()
+                            below(R.id.eventdetail_textview_date)
                             bottomMargin = dip(16)
                         }
 
@@ -204,7 +217,7 @@ class EventDetailActivity : AppCompatActivity(),
                             width = matchParent
                             height = wrapContent
                             centerHorizontally()
-                            below(R.id.eventdetail_textview_date)
+                            below(R.id.eventdetail_textview_time)
                             bottomMargin = dip(16)
                         }
 

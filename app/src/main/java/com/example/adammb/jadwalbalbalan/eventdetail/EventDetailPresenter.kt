@@ -41,7 +41,7 @@ class EventDetailPresenter(private val view: EventDetailContract.EventDetailView
     override fun getFavoriteState(eventId: String): Boolean {
         var isFavorited: Boolean = false
         view.getContext().database.use {
-            val result = select(Event.TABLE_FAVORITE)
+            val result = select(Event.TABEL_FAVORITE_MATCH)
                     .whereArgs("(${Event.EVENT_ID} = {EVENT_ID})",
                             "EVENT_ID" to eventId)
             val favorite = result.parseList(classParser<Event>())
@@ -55,9 +55,10 @@ class EventDetailPresenter(private val view: EventDetailContract.EventDetailView
     override fun addToFavorite(event: Event?) {
         try {
             view.getContext().database.use {
-                insert(Event.TABLE_FAVORITE,
+                insert(Event.TABEL_FAVORITE_MATCH,
                         Event.EVENT_ID to event?.eventId,
                         Event.DATE to event?.date,
+                        Event.TIME to event?.time,
                         Event.TEAM_HOME_ID to event?.teamHomeId,
                         Event.TEAM_HOME_NAME to event?.teamHomeName,
                         Event.TEAM_HOME_SCORE to event?.teamHomeScore,
@@ -75,7 +76,8 @@ class EventDetailPresenter(private val view: EventDetailContract.EventDetailView
                         Event.TEAM_AWAY_LINEUP_GOALKEEPER to event?.teamAwayLineupGoalkeeper,
                         Event.TEAM_AWAY_LINEUP_DEFENSE to event?.teamAwayLineupDefense,
                         Event.TEAM_AWAY_LINEUP_MIDFIELD to event?.teamAwayLineupMidfield,
-                        Event.TEAM_AWAY_LINEUP_FORWARD to event?.teamAwayLineupForward)
+                        Event.TEAM_AWAY_LINEUP_FORWARD to event?.teamAwayLineupForward,
+                        Event.SPORT_TYPE to event?.sportType)
             }
             Toast.makeText(view.getContext(), "Added to Favorite", Toast.LENGTH_SHORT).show()
         } catch (e: SQLiteConstraintException) {
@@ -86,7 +88,7 @@ class EventDetailPresenter(private val view: EventDetailContract.EventDetailView
     override fun removeFromFavorite(eventId: String) {
         try {
             view.getContext().database.use {
-                delete(Event.TABLE_FAVORITE,
+                delete(Event.TABEL_FAVORITE_MATCH,
                         "(${Event.EVENT_ID} = {EVENT_ID})",
                         "EVENT_ID" to eventId)
             }
