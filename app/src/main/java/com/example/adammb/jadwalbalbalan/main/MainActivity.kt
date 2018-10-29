@@ -12,6 +12,9 @@ import android.support.v7.widget.Toolbar
 import android.view.Gravity
 import com.example.adammb.jadwalbalbalan.R
 import com.example.adammb.jadwalbalbalan.event.EventFragment
+import com.example.adammb.jadwalbalbalan.event.EventTabFragment
+import com.example.adammb.jadwalbalbalan.favourite.FavoriteTabFragment
+import com.example.adammb.jadwalbalbalan.team.TeamFragment
 import org.jetbrains.anko.*
 import org.jetbrains.anko.appcompat.v7.toolbar
 import org.jetbrains.anko.design.bottomNavigationView
@@ -20,24 +23,20 @@ import org.jetbrains.anko.design.themedAppBarLayout
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var toolbar: Toolbar
     private lateinit var navigation: BottomNavigationView
 
     private val mOnNavigationItemSelectedListener = OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
-            R.id.navigation_previous_match -> {
-                supportActionBar?.title = getString(R.string.title_previous_match)
-                replaceFragment(EventFragment.newInstance(EventFragment.EVENT_TYPE_PREV))
+            R.id.navigation_match -> {
+                replaceFragment(EventTabFragment.newInstance())
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_next_match -> {
-                supportActionBar?.title = getString(R.string.title_next_match)
-                replaceFragment(EventFragment.newInstance(EventFragment.EVENT_TYPE_NEXT))
+            R.id.navigation_team -> {
+                replaceFragment(TeamFragment.newInstance(TeamFragment.TYPE_LIST))
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_favorite -> {
-                supportActionBar?.title = getString(R.string.title_favorite)
-                replaceFragment(EventFragment.newInstance(EventFragment.EVENT_TYPE_FAVORITE))
+                replaceFragment(FavoriteTabFragment.newInstance())
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -48,13 +47,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         MainActivityUI().setContentView(this)
 
-        toolbar = find(R.id.main_toolbar)
         navigation = find(R.id.main_navigation)
 
-        setSupportActionBar(toolbar)
         if (savedInstanceState == null) {
-            replaceFragment(EventFragment.newInstance(EventFragment.EVENT_TYPE_PREV))
-            supportActionBar?.title = getString(R.string.title_previous_match)
+            replaceFragment(EventTabFragment.newInstance())
         }
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
@@ -76,18 +72,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 backgroundColor = ContextCompat.getColor(context, R.color.grey_200)
 
-                themedAppBarLayout(R.style.AppTheme_AppBarOverlay) {
-                    id = R.id.main_appbar
-
-                    toolbar {
-                        id = R.id.main_toolbar
-                        setTitleTextColor(Color.WHITE)
-                        popupTheme = R.style.AppTheme_PopupOverlay
-                    }.lparams(width = matchParent) {
-                        scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
-                    }
-                }.lparams(width = matchParent)
-
                 frameLayout {
                     id = R.id.main_framelayout_container
                     bottomPadding = dip(48)
@@ -106,4 +90,3 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
-
