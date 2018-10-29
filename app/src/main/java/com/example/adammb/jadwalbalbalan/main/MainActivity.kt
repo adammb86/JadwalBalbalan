@@ -1,6 +1,5 @@
 package com.example.adammb.jadwalbalbalan.main
 
-import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.BottomNavigationView
@@ -8,18 +7,14 @@ import android.support.design.widget.BottomNavigationView.OnNavigationItemSelect
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.view.Gravity
 import com.example.adammb.jadwalbalbalan.R
-import com.example.adammb.jadwalbalbalan.event.EventFragment
 import com.example.adammb.jadwalbalbalan.event.EventTabFragment
 import com.example.adammb.jadwalbalbalan.favourite.FavoriteTabFragment
 import com.example.adammb.jadwalbalbalan.team.TeamFragment
 import org.jetbrains.anko.*
-import org.jetbrains.anko.appcompat.v7.toolbar
 import org.jetbrains.anko.design.bottomNavigationView
 import org.jetbrains.anko.design.coordinatorLayout
-import org.jetbrains.anko.design.themedAppBarLayout
 
 
 class MainActivity : AppCompatActivity() {
